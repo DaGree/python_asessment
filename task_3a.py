@@ -1,6 +1,11 @@
 import configparser
+import requests
 
-config = configparser.ConfigParser()  # создаём объекта парсера
-config.read("settings.ini")  # читаем конфиг
+def get_token():
+    config = configparser.ConfigParser()  # создаём объекта парсера
+    config.read("settings.ini")  # читаем конфиг
+    return config["Weather"]["token"]
 
-print(config["Weather"]["token"])
+print(get_token())
+city=input("Enter your own city \n>")
+print("Your own city is "+city)
