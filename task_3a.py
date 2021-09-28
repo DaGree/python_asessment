@@ -1,5 +1,6 @@
 import configparser
 import requests
+import json
 
 def get_token():
     config = configparser.ConfigParser()  # создаём объекта парсера
@@ -9,11 +10,12 @@ def get_token():
 #print(get_token())
 token=get_token()
 #print(token)
-city=input("Enter your own city \n>")
+#city=input("Enter your own city \n>")
+city="Moscow"
 #print("Your own city is "+city)
-endpoint = "http://api.openweathermap.org/data/2.5/weather"
-query_params = {"appid":token, "q":city, "units":"metric", "lang":"ru"}
+endpoint = "http://api.openweathermap.org/data/2.5/forecast"
+query_params = {"appid":token, "q":"Moscow", "units":"metric", "lang":"ru"}
 
-response = requests.get(endpoint, params=query_params)
-
-print(response.text)
+response = requests.get(endpoint, params=query_params).json()
+description=response
+print(description)
