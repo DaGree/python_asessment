@@ -27,7 +27,7 @@ def delta_temp_day(description):
             deltak.append(abs(temp_min-feels_like))
     id_omega=deltak.index(min(deltak))
     id_list=omega[id_omega]
-    print(min(deltak)," °C - минимальная разница температур ночью ")
+    print(round(min(deltak),2)," °C - минимальная разница температур ночью ")
     print("Дата дня с минимальной разницей",description["list"][id_list]["dt_txt"][:10])
 
 def request_to_api(token,city):
@@ -72,7 +72,16 @@ def max_sun(description):
     print(zakat.strftime('%Y-%m-%d'))
 
 token=get_token()
-city=input_city()
-description=request_to_api(token,city)
-delta_temp_day(description)
-max_sun(description)
+
+answer=True
+while answer:
+    city=input_city()
+    description=request_to_api(token,city)
+    delta_temp_day(description)
+    max_sun(description)
+    #print("Вы хотите продолжить?(y/n)\n>")
+    check=input("Вы хотите продолжить?(y/n)\n>")
+    if (check=='y'):
+        answer=True
+    else:
+        answer=False
